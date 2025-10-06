@@ -1,0 +1,34 @@
+IMAGE NAMES - QUICK REFERENCE
+==============================
+
+Place all images in: public/assets/images/
+
+EXACT FILE NAMES NEEDED:
+------------------------
+
+1. logo.png                    (Your logo, 44x44px+)
+2. powerapps.png              (Power Apps icon, 60-100px)
+3. powerautomate.png          (Power Automate icon, 60-100px)
+4. sharepoint.png             (SharePoint icon, 60-100px)
+5. dataverse.png              (Dataverse icon, 60-100px)
+6. chatbot.png                (Chatbot icon, 60-100px)
+7. project-placeholder.png     (Project screenshots, 400x300px)
+8. og-image.jpg               (Social sharing, 1200x630px)
+9. favicon.png                (Browser icon, 32x32px) [Optional]
+
+MOST IMPORTANT (for floating animation):
+- powerapps.png
+- powerautomate.png
+- sharepoint.png
+- dataverse.png
+- chatbot.png
+
+These 5 images create the floating background animation!
+
+TIPS:
+- Use PNG with transparent background for logos/icons
+- Use JPG for photos/screenshots
+- Compress images before uploading (tinypng.com)
+- Keep exact file names (case-sensitive!)
+
+See IMAGE_NAMES_LIST.md for full details.
