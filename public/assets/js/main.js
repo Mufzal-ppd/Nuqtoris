@@ -236,21 +236,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 450);
     });
   });
-
-  // ---- GSAP scrollReveal for sections ----
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.utils.toArray('section').forEach(s => {
-      gsap.from(s.querySelectorAll('.card, .project-card, .skill-card, .about-card, .cert-card'), {
-        scrollTrigger: { trigger: s, start: "top 80%" },
-        opacity: 0,
-        y: 36,
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.12
-      });
+  // ---- FIX: Make all sections visible immediately (no opacity 0) ----
+if (window.gsap && window.ScrollTrigger) {
+  gsap.utils.toArray('section').forEach(s => {
+    const elements = s.querySelectorAll('.card, .project-card, .skill-card, .about-card, .cert-card');
+    elements.forEach(el => {
+      el.style.opacity = '1';
+      el.style.visibility = 'visible';
+      el.style.transform = 'none';
     });
-  }
-
+  });
+}
   // ---- accessibility: keyboard focus for nav links ----
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('focus', () => a.classList.add('focused')));
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('blur', () => a.classList.remove('focused')));
