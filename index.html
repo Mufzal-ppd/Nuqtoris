@@ -3,31 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mufzal Shaikh — Power Platform Developer</title>
-  <meta name="description" content="Mufzal Shaikh — Microsoft Certified Power Platform Developer. Power Apps, Power Automate, SharePoint, Dataverse, API integration and Copilot bots." />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="public/assets/images/favicon.png">
+  <title>Mufzal Shaikh - Microsoft Certified Power Platform Developer</title>
+  <meta name="description" content="Power Platform Developer specializing in Power Apps, Power Automate, Dataverse, SharePoint, and AI Chatbots. 2.5+ years experience building enterprise solutions." />
+  <meta name="keywords" content="Power Platform, Power Apps, Power Automate, Dataverse, SharePoint, Microsoft, Developer, Freelance" />
+  <meta name="author" content="Mufzal Shaikh" />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <meta property="og:title" content="Mufzal Shaikh - Power Platform Developer" />
+  <meta property="og:description" content="Building custom business applications and automation solutions using Microsoft Power Platform" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nuqtoris.com" />
+  <meta property="og:image" content="https://nuqtoris.com/public/assets/images/og-image.jpg" />
 
-  <!-- Styles -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mufzal Shaikh - Power Platform Developer" />
+  <meta name="twitter:description" content="Building custom business applications and automation solutions" />
+  <meta name="twitter:image" content="https://nuqtoris.com/public/assets/images/og-image.jpg" />
+
+  <link rel="icon" type="image/png" href="public/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="public/assets/css/style.css">
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-
-  <!-- Main JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script defer src="public/assets/js/main.js"></script>
 </head>
 <body id="page-body" class="theme-dark">
 
-  <!-- animated gradient -->
   <div id="animated-gradient" aria-hidden="true"></div>
 
-  <!-- floating logos (base images: main.js clones and animates them) -->
   <div id="floating-root" class="floating-logos" aria-hidden="true">
     <img src="public/assets/images/powerapps.png" data-name="Power Apps" class="logo-src" alt="Power Apps">
     <img src="public/assets/images/powerautomate.png" data-name="Power Automate" class="logo-src" alt="Power Automate">
@@ -37,23 +43,22 @@
     <img src="public/assets/images/powerbi.png" data-name="Power BI" class="logo-src" alt="Power BI">
   </div>
 
-  <!-- custom cursor -->
   <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
   <div id="cursor-outline" class="cursor-outline" aria-hidden="true"></div>
 
-  <!-- theme toggle -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
 
-  <!-- navigation -->
   <nav class="nav" role="navigation">
     <div class="nav-inner container">
-      <a class="brand" href="index.html">
-        <img class="brand-logo" src="public/assets/images/logo.png" alt="Mufzal logo">
+      <div class="brand">
+        <img src="public/assets/images/logo.png" alt="Mufzal Shaikh Logo" class="brand-logo">
         <span class="brand-text">Mufzal Shaikh</span>
-      </a>
+      </div>
 
-      <button id="nav-toggle" class="nav-toggle" aria-label="Open menu">
-        <span></span><span></span><span></span>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
       <ul class="nav-links" role="menu">
@@ -62,149 +67,210 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="templates.html">Templates</a></li>
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html" class="btn-link">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
-    <!-- HERO: layered 3D/parallax split -->
+
     <section id="home" class="hero container">
       <div class="hero-inner">
-        <div class="hero-left">
-          <h1 class="hero-title">Hi — I’m <span class="name-highlight">Mufzal Shaikh</span></h1>
-          <p class="hero-sub">Microsoft Certified Power Platform Developer</p>
-          <p class="hero-lead">I build simple, secure apps and automations that remove repetitive work and save teams time — so you can focus on what matters.</p>
+        <h1 class="hero-title">Hi, I'm <span class="name-highlight">Mufzal Shaikh</span></h1>
+        <p class="hero-sub">Microsoft Certified Power Platform Developer</p>
+        <p class="hero-tagline">Building custom business applications and automation solutions that save time, reduce costs, and empower teams</p>
 
-          <div class="hero-ctas">
-            <a href="projects.html" class="btn btn-primary ripple">View Work</a>
-            <a href="contact.html" class="btn btn-ghost ripple">Talk to Me</a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat"><strong>400+</strong><span>Active users</span></div>
-            <div class="stat"><strong>20+</strong><span>Apps built</span></div>
-            <div class="stat"><strong>40+</strong><span>Workflows</span></div>
-          </div>
+        <div class="hero-ctas">
+          <a href="projects.html" class="btn btn-primary ripple">View My Work</a>
+          <a href="contact.html" class="btn btn-ghost ripple">Get In Touch</a>
         </div>
 
-        <div class="hero-right">
-          <!-- visual layer that interacts with floating icons for parallax -->
-          <div class="hero-visual">
-            <div class="visual-card card">
-              <h3>Example: Document Approval Flow</h3>
-              <p>Automates approvals, stores records securely, and notifies teams automatically.</p>
-              <div class="mini-meta">Demo available on request</div>
-            </div>
-          </div>
+        <div class="hero-badges">
+          <span class="badge">400+ Active Users</span>
+          <span class="badge">20+ Apps Built</span>
+          <span class="badge">40+ Workflows</span>
+          <span class="badge">95%+ Satisfaction</span>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="section container">
       <h2 class="section-title">Professional Summary</h2>
-      <div class="about-grid">
-        <div class="card about-card">
-          <p class="tagline">I help businesses reduce manual tasks by building easy-to-use apps and automations using Microsoft Power Platform.</p>
-          <p>With 2.5+ years building Power Apps, Power Automate flows, SharePoint integrations and API solutions, I deliver secure tools that make teams faster and more accurate.</p>
-          <ul class="bullets">
-            <li>PL-900 certified</li>
-            <li>Power Apps — canvas & model-driven apps</li>
-            <li>Power Automate — approvals, scheduled & API flows</li>
-            <li>SharePoint & Dataverse integrations</li>
-          </ul>
-        </div>
+      <div class="card about-card">
+        <p class="tagline">I help startups, SMBs, and enterprises build custom business applications and automate processes using Microsoft Power Platform.</p>
 
-        <div class="card metrics-card">
-          <div class="metric"><strong>400+</strong><span>Active users</span></div>
-          <div class="metric"><strong>20+</strong><span>Apps built</span></div>
-          <div class="metric"><strong>40+</strong><span>Workflows</span></div>
+        <p>With 2.5+ years of hands-on experience in Power Apps, Power Automate, Dataverse, SharePoint, SQL, JSON, Custom Connectors, API Integrations and Microsoft Copilot Bots, I specialize in delivering solutions that reduce manual work, improve efficiency, and ensure secure access to business data.</p>
+
+        <div class="achievements-grid">
+          <div class="achievement-item">
+            <span class="achievement-number">400+</span>
+            <span class="achievement-text">Active Users</span>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-number">20+</span>
+            <span class="achievement-text">Apps Built</span>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-number">40+</span>
+            <span class="achievement-text">Workflows Automated</span>
+          </div>
+          <div class="achievement-item">
+            <span class="achievement-number">80%</span>
+            <span class="achievement-text">Time Saved</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="section container">
       <h2 class="section-title">Core Services</h2>
-      <p class="section-subtitle">Solutions I deliver — from idea to working automation.</p>
+      <p class="section-subtitle">End-to-end Power Platform solutions designed to automate, streamline, and empower your business.</p>
+
       <div class="services-grid">
         <div class="card service-card">
           <div class="service-icon">📱</div>
-          <h3>Apps that work for users</h3>
-          <p>Intuitive Power Apps with clear navigation and fast performance.</p>
+          <h3>Power Apps Development</h3>
+          <p>Building intuitive canvas and model-driven apps tailored to complex business logic.</p>
+          <ul class="service-list">
+            <li>Canvas & Model-Driven Apps</li>
+            <li>UI/UX Focused Design</li>
+            <li>Cross-Device Compatibility</li>
+          </ul>
         </div>
+
         <div class="card service-card">
           <div class="service-icon">⚙️</div>
-          <h3>Automations that save time</h3>
-          <p>Power Automate flows to remove repetitive work and reduce errors.</p>
+          <h3>Process Automation</h3>
+          <p>Designing robust Power Automate flows to connect systems and eliminate manual tasks.</p>
+          <ul class="service-list">
+            <li>Multi-Level Approval Workflows</li>
+            <li>Custom API Integrations</li>
+            <li>Scheduled & Event-Triggered Flows</li>
+          </ul>
         </div>
+
         <div class="card service-card">
           <div class="service-icon">🗃️</div>
-          <h3>Secure document & data solutions</h3>
-          <p>SharePoint and Dataverse designs that keep your data safe and accessible.</p>
+          <h3>Data & Integration</h3>
+          <p>Structuring data and building secure connections between services.</p>
+          <ul class="service-list">
+            <li>Dataverse & SharePoint</li>
+            <li>REST APIs & Custom Connectors</li>
+            <li>SQL & JSON Data Handling</li>
+          </ul>
         </div>
+
         <div class="card service-card">
           <div class="service-icon">🤖</div>
-          <h3>Smart assistants</h3>
-          <p>Copilot and chatbots to answer common questions and automate support.</p>
+          <h3>AI & Chatbots</h3>
+          <p>Implementing AI Builder models and Power Virtual Agents for intelligent automation.</p>
+          <ul class="service-list">
+            <li>Power Virtual Agents (PVA)</li>
+            <li>AI Builder Integration</li>
+            <li>Microsoft Copilot Studio</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects-preview" class="section container">
       <h2 class="section-title">Featured Projects</h2>
+
       <div class="projects-grid">
         <article class="card project-card">
-          <h4>School Observation App</h4>
-          <p>Track teacher performance across branches. Demo available on request.</p>
-          <div class="meta">Useful for: Education • Duration: 2 weeks</div>
+          <div class="project-media project-placeholder">
+            <img src="public/assets/images/project-placeholder.png" alt="School Observation App">
+            <div class="play-overlay">▶</div>
+          </div>
+          <div class="project-body">
+            <h3>School Observation App</h3>
+            <p>A Power Apps solution for 50+ HODs and Principals across 7 branches to track teacher performance.</p>
+            <div class="project-impact">
+              <strong>Impact:</strong> Reduced reporting time and paperwork by 60%.
+            </div>
+            <p class="demo-note">Demo available on request.</p>
+          </div>
         </article>
 
         <article class="card project-card">
-          <h4>CRM with Lead Verification</h4>
-          <p>Real-time lead verification via APIs with approvals. Demo available on request.</p>
-          <div class="meta">Useful for: Sales • Duration: 3 weeks</div>
+          <div class="project-media project-placeholder">
+            <img src="public/assets/images/project-placeholder.png" alt="CRM with API Verification">
+            <div class="play-overlay">▶</div>
+          </div>
+          <div class="project-body">
+            <h3>CRM with API Verification</h3>
+            <p>Developed a CRM integrated with APIs for real-time lead verification and multi-level approvals.</p>
+            <div class="project-impact">
+              <strong>Impact:</strong> Serves 150+ users with secure, dynamic document creation.
+            </div>
+            <p class="demo-note">Demo available on request.</p>
+          </div>
         </article>
 
         <article class="card project-card">
-          <h4>Document Management System</h4>
-          <p>SharePoint + Power Apps DMS with role-based access. Demo available on request.</p>
-          <div class="meta">Useful for: HR/Legal • Duration: 3 weeks</div>
+          <div class="project-media project-placeholder">
+            <img src="public/assets/images/project-placeholder.png" alt="MSME & CIN Integration">
+            <div class="play-overlay">▶</div>
+          </div>
+          <div class="project-body">
+            <h3>MSME & CIN API Integration</h3>
+            <p>Automated bulk data retrieval from government APIs using Power Automate.</p>
+            <div class="project-impact">
+              <strong>Impact:</strong> Eliminated 200+ manual lookups per month.
+            </div>
+            <p class="demo-note">Demo available on request.</p>
+          </div>
         </article>
       </div>
 
-      <div class="text-center" style="margin-top:1.5rem;">
-        <a href="projects.html" class="btn btn-primary">View All Projects</a>
+      <div class="text-center" style="margin-top: 2rem;">
+        <a href="projects.html" class="btn btn-primary ripple">View All Projects</a>
       </div>
     </section>
 
-    <!-- COMMITMENT -->
     <section id="promise" class="section container">
       <h2 class="section-title">My Commitment</h2>
-      <div class="promise-grid card">
-        <div class="promise-item"><strong>Fast & Reliable</strong><p>On-time, tested delivery.</p></div>
-        <div class="promise-item"><strong>Clear Communication</strong><p>Regular updates and plain-English explanations.</p></div>
-        <div class="promise-item"><strong>Secure Solutions</strong><p>Performance & secure access.</p></div>
-        <div class="promise-item"><strong>Support</strong><p>Documentation & short-term post-delivery help.</p></div>
+      <div class="card promise-card">
+        <p class="tagline">When you work with me, you get more than just a developer — you get a partner committed to your success.</p>
+        <div class="promise-grid">
+          <div class="promise-item">
+            <strong>Fast & Reliable Delivery</strong>
+            <p>On-time and within scope.</p>
+          </div>
+          <div class="promise-item">
+            <strong>Clear Communication</strong>
+            <p>Regular updates, no surprises.</p>
+          </div>
+          <div class="promise-item">
+            <strong>Future-Proof Solutions</strong>
+            <p>Secure, scalable, and maintainable.</p>
+          </div>
+          <div class="promise-item">
+            <strong>Long-Term Support</strong>
+            <p>Documentation, training & post-deployment assistance.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="section container">
       <div class="card cta-card">
-        <h2>Ready to automate and save time?</h2>
-        <p>Share a short brief and I’ll respond with a simple plan and cost estimate.</p>
-        <a href="contact.html" class="btn btn-primary">Start a Conversation</a>
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Let's discuss how I can help automate your workflows and build apps that save time and cost.</p>
+        <a href="contact.html" class="btn btn-primary ripple">Start a Conversation</a>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year"></span> Mufzal Shaikh — Power Platform Developer</p>
-      <p><a href="https://www.linkedin.com/in/mufzal-shaikh" target="_blank" rel="noopener">LinkedIn</a> • <a href="mailto:mufzal.ppd@gmail.com">Email</a></p>
+      <p>&copy; <span id="year"></span> Mufzal Shaikh. All rights reserved.</p>
+      <p>
+        <a href="https://www.linkedin.com/in/mufzal-shaikh" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="mailto:info@nuqtoris.com">Email</a> |
+        <a href="https://nuqtoris.com" target="_blank" rel="noopener noreferrer">Website</a>
+      </p>
     </div>
   </footer>
 
