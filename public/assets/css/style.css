@@ -188,7 +188,7 @@ button:hover ~ .cursor-outline {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -1; /* 👈 Push behind everything */
+  z-index: 0; /* 👈 Push behind everything */
   pointer-events: none;
   opacity: 0.5; /* 👈 Make subtle */
   filter: blur(2px) saturate(1.1); /* 👈 Slight blur for depth */
