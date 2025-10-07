@@ -1164,3 +1164,18 @@ a:hover::after {
   font-size: 1.125rem;
   color: var(--text-secondary);
 }
+/* ===== VISIBILITY FIX ===== */
+/* Ensure all content is always visible, even before GSAP initializes */
+.card,
+.project-card,
+.service-card,
+.about-card,
+.promise-item,
+.skill-card,
+.cert-card,
+section {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
