@@ -252,6 +252,39 @@ if (window.gsap && window.ScrollTrigger) {
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('blur', () => a.classList.remove('focused')));
 
   // ---- optional: subtle parallax on hero mousemove ----
+  // ---- NAME GLOW ANIMATION (GSAP-based TextPressure alternative) ----
+if (window.gsap) {
+  const nameEl = document.querySelector('.name-highlight');
+  if (nameEl) {
+    // Soft glowing loop animation
+    gsap.to(nameEl, {
+      textShadow: "0 0 20px rgba(102,126,234,0.8), 0 0 40px rgba(118,75,162,0.5)",
+      repeat: -1,
+      yoyo: true,
+      duration: 2.5,
+      ease: "sine.inOut"
+    });
+
+    // Optional hover interactivity for nice tactile feel
+    nameEl.addEventListener('mouseenter', () => {
+      gsap.to(nameEl, {
+        scale: 1.05,
+        letterSpacing: "2px",
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    });
+
+    nameEl.addEventListener('mouseleave', () => {
+      gsap.to(nameEl, {
+        scale: 1,
+        letterSpacing: "0px",
+        duration: 0.4,
+        ease: "power2.inOut"
+      });
+    });
+  }
+}
   const hero = document.querySelector('.hero');
   if (hero) {
     hero.addEventListener('mousemove', e => {
