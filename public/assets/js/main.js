@@ -1,7 +1,10 @@
-/* main.js — optimized floating icons + visibility + cursor */
+/* main.js — GSAP-driven interactions, floating logos, cursor, ripple, theme, scroll animations */
+
 document.addEventListener('DOMContentLoaded', () => {
+  // ---- basic DOM refs ----
   const body = document.getElementById('page-body') || document.body;
   const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = themeToggle;
   const floatingRoot = document.getElementById('floating-root');
   const logoSources = Array.from(document.querySelectorAll('#floating-root .logo-src'));
   const animatedGradient = document.getElementById('animated-gradient');
@@ -10,155 +13,180 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('nav-toggle');
   const navLinks = document.querySelector('.nav-links');
 
-  // footer year
+  // ---- set year in footer ----
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // theme init
+  // ---- THEME: read/save ----
   const saved = localStorage.getItem('site-theme') || 'dark';
   applyTheme(saved);
+
   function applyTheme(mode){
     body.classList.remove('theme-dark','theme-light');
     body.classList.add(mode === 'light' ? 'theme-light' : 'theme-dark');
     localStorage.setItem('site-theme', mode);
-    if (themeToggle) themeToggle.textContent = mode === 'light' ? '☀️' : '🌙';
-    if (animatedGradient) animatedGradient.style.opacity = mode === 'light' ? 0.9 : 0.95;
+    themeToggle.textContent = mode === 'light' ? '☀️' : '🌙';
+    // subtle gradient tint depending on theme
+    if (mode === 'light') {
+      animatedGradient.style.opacity = 0.9;
+      animatedGradient.style.filter = 'blur(36px) saturate(1.05)';
+    } else {
+      animatedGradient.style.opacity = 0.95;
+      animatedGradient.style.filter = 'blur(40px) saturate(1.05)';
+    }
   }
-  if (themeToggle) themeToggle.addEventListener('click', () => applyTheme(body.classList.contains('theme-light') ? 'dark' : 'light'));
 
-  // nav toggle mobile
+  themeToggle.addEventListener('click', () => {
+    const current = body.classList.contains('theme-light') ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  // ---- mobile navigation toggle ----
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      // animate hamburger icon
+      const spans = navToggle.querySelectorAll('span');
+      if (navLinks.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translateY(9px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translateY(-9px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
+
+    // close menu when clicking on a link
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 980) navLinks.classList.remove('active');
+        if (window.innerWidth <= 768) {
+          navLinks.classList.remove('active');
+          const spans = navToggle.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
       });
     });
   }
 
-  // ensure content visible immediately (remove accidental hidden states)
-  document.querySelectorAll('.card, .project-card, .service-card, .about-card, .promise-item').forEach(el => {
-    el.style.opacity = '1';
-    el.style.visibility = 'visible';
+  // ---- smooth anchor scrolling for nav links ----
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      // Only prevent default if it's an anchor link (starts with #)
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const rect = target.getBoundingClientRect();
+          const top = window.scrollY + rect.top - 80; // offset for nav
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
   });
 
-  // build clones (uniform size)
+  // ---- create multiple floating logo clones (2-3 times each) ----
   const clones = [];
   logoSources.forEach(src => {
-    const repeat = 1; // keep one clone per base icon for performance
+    const repeat = 1; // how many copies total for each base logo
     for (let i = 0; i < repeat; i++) {
       const node = document.createElement('div');
       node.className = 'logo-clone';
       const img = document.createElement('img');
       img.src = src.src;
       img.alt = src.getAttribute('data-name') || 'logo';
-      img.style.width = '64px';
-      img.style.height = '64px';
-      img.style.objectFit = 'contain';
       node.appendChild(img);
-      node.style.opacity = '0.95';
-      node.style.transform = 'translate3d(0,0,0)';
-      node.style.willChange = 'transform, left, top';
+      // small random scale & opacity for depth
+      node.style.transform = `scale(${(0.85 + Math.random() * 0.4).toFixed(2)})`;
+      node.style.opacity = (0.65 + Math.random() * 0.35).toFixed(2);
       floatingRoot.appendChild(node);
-      clones.push({ el: node });
+      clones.push({ el: node, name: src.getAttribute('data-name') });
     }
   });
-  // remove base images
+
+  // remove base sources from DOM (we only need clones)
   logoSources.forEach(s => s.remove());
 
-  // wait small tick for paint, then start GSAP to avoid blocking first paint
-  requestAnimationFrame(() => {
-    setTimeout(initAnimations, 40);
-  });
-
-  function initAnimations() {
+  // ---- randomly place and animate clones (GTA-like leaf/newspaper movement) ----
+  clones.forEach((item, idx) => {
+    const el = item.el;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    clones.forEach((item, idx) => {
-      const el = item.el;
-      // starting position
-      const startX = Math.random() * vw;
-      const startY = Math.random() * vh;
-      el.style.left = `${startX}px`;
-      el.style.top = `${startY}px`;
+    // random start positions
+    const startX = Math.random() * vw;
+    const startY = Math.random() * vh;
 
-      // main wandering animation
-      gsap.to(el, {
-        x: `+=${(Math.random() * 400 - 200).toFixed(0)}`,
-        y: `+=${(Math.random() * 300 - 150).toFixed(0)}`,
-        rotation: (Math.random() * 40 - 20).toFixed(2),
-        duration: 10 + Math.random() * 10,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        delay: Math.random() * 2
-      });
+    el.style.left = `${startX}px`;
+    el.style.top = `${startY}px`;
 
-      // subtle 3D tilt
-      gsap.to(el, {
-        rotationX: gsap.utils.random(-18, 18),
-        rotationY: gsap.utils.random(-18, 18),
-        duration: 6 + Math.random() * 6,
-        ease: "power1.inOut",
-        repeat: -1,
-        yoyo: true,
-        delay: Math.random() * 2
-      });
+    // random rotation seed
+    const r = (Math.random() * 360).toFixed(2);
 
-      // soft glow (cheap; uses boxShadow tween)
-      gsap.to(el, {
-        boxShadow: "0 28px 60px rgba(124,58,237,0.12)",
-        duration: 2.5 + Math.random()*2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
+    // GSAP random wandering like paper/leaves (gentle wind)
+    const t = gsap.to(el, {
+      x: `+=${(Math.random() * 600 - 300).toFixed(0)}`,
+      y: `+=${(Math.random() * 400 - 200).toFixed(0)}`,
+      rotation: `+=${(Math.random() * 720 - 360).toFixed(0)}`,
+      duration: 12 + Math.random() * 12,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      delay: Math.random() * 4,
+      onStart: () => { el.style.willChange = "transform, left, top"; } // perf hint
     });
 
-    // ScrollTrigger reveals (non-blocking; do not set initial opacity:0 in CSS)
-    try {
-      if (gsap && gsap.registerPlugin) {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('section').forEach(s => {
-          ScrollTrigger.create({
-            trigger: s,
-            start: 'top 85%',
-            onEnter: () => {
-              gsap.fromTo(s.querySelectorAll('.card, .project-card, .service-card, .about-card, .promise-item'),
-                { y: 18, opacity: 0 }, { y:0, opacity:1, duration: 0.7, stagger: 0.08, ease: "power3.out" });
-            },
-            once: true
-          });
-        });
-      }
-    } catch (err) {
-      console.warn('ScrollTrigger init failed', err);
-    }
-  }
+    // gentle periodic tilt/flip to emulate paper flipping
+    gsap.to(el, {
+      rotationX: gsap.utils.random(-30, 30),
+      rotationY: gsap.utils.random(-30, 30),
+      duration: 6 + Math.random()*8,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: Math.random()*3
+    });
 
-  // cursor movement (lightweight)
+    // small glow pulse
+    gsap.to(el, {
+      boxShadow: "0 32px 80px rgba(139,92,246,0.24)",
+      duration: 2 + Math.random()*2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  });
+
+  // ---- cursor movement + trailing outline ----
   let mouse = { x: window.innerWidth/2, y: window.innerHeight/2 };
   let outlinePos = { x: mouse.x, y: mouse.y };
-  window.addEventListener('mousemove', e => {
+  window.addEventListener('mousemove', (e) => {
     mouse.x = e.clientX; mouse.y = e.clientY;
-    if (cursorDot) gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.02, ease: 'power1.out' });
-    gsap.to(outlinePos, { x: e.clientX, y: e.clientY, duration: 0.22, ease: 'power3.out', onUpdate: () => {
-      if (cursorOutline) cursorOutline.style.transform = `translate(${outlinePos.x}px, ${outlinePos.y}px) translate(-50%,-50%)`;
+    // dot follows directly
+    gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0.02, ease: "power1.out" });
+    // outline has lag
+    gsap.to(outlinePos, { x: e.clientX, y: e.clientY, duration: 0.22, ease: "power3.out", onUpdate: () => {
+      cursorOutline.style.transform = `translate(${outlinePos.x}px, ${outlinePos.y}px) translate(-50%,-50%)`;
     }});
   });
 
-  // disable fancy cursor on touch devices
-  if (window.matchMedia('(pointer: coarse)').matches) {
-    if (cursorDot) cursorDot.style.display = 'none';
-    if (cursorOutline) cursorOutline.style.display = 'none';
+  // hide cursor elements on small screens
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    cursorDot.style.display = 'none';
+    cursorOutline.style.display = 'none';
+    body.style.cursor = 'auto';
   } else {
-    gsap.set(cursorDot, { x: mouse.x, y: mouse.y });
-    gsap.set(cursorOutline, { x: mouse.x, y: mouse.y });
+    // init cursor element positions
+    gsap.set(cursorDot, { x: mouse.x, y: mouse.y, translate: "-50% -50%" });
+    gsap.set(cursorOutline, { x: mouse.x, y: mouse.y, translate: "-50% -50%" });
   }
 
-  // logo repel (lightweight)
-  const repelRadius = 120;
+  // ---- logo repel interaction: logos move away when cursor is near ----
+  const repelRadius = 140;
   function handleRepel(e) {
     clones.forEach(item => {
       const rect = item.el.getBoundingClientRect();
@@ -167,29 +195,99 @@ document.addEventListener('DOMContentLoaded', () => {
       const dx = cx - e.clientX;
       const dy = cy - e.clientY;
       const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < repelRadius && dist > 0) {
+      if (dist < repelRadius) {
         const strength = (repelRadius - dist) / repelRadius;
-        const pushX = (dx / dist) * (20 + 120 * strength);
-        const pushY = (dy / dist) * (10 + 80 * strength);
-        gsap.to(item.el, { x: `+=${pushX}`, y: `+=${pushY}`, duration: 0.45, ease: 'power2.out' });
+        // compute a push vector away from cursor
+        const pushX = (dx / dist) * (40 + 200 * strength);
+        const pushY = (dy / dist) * (20 + 120 * strength);
+        gsap.to(item.el, { x: `+=${pushX}`, y: `+=${pushY}`, duration: 0.45, ease: "power2.out" });
         item.el.classList.add('logo-glow');
       } else {
+        // gently let them return (small nudge)
         item.el.classList.remove('logo-glow');
       }
     });
   }
   window.addEventListener('mousemove', handleRepel);
 
-  // debounced resize reposition
+  // ---- ripple effect for buttons ----
+  document.querySelectorAll('.ripple').forEach(btn => {
+    btn.addEventListener('click', (ev) => {
+      const rect = btn.getBoundingClientRect();
+      const circle = document.createElement('span');
+      circle.className = 'ripple-effect';
+      const size = Math.max(rect.width, rect.height) * 1.2;
+      circle.style.width = circle.style.height = `${size}px`;
+      const x = ev.clientX - rect.left - size/2;
+      const y = ev.clientY - rect.top - size/2;
+      circle.style.left = `${x}px`;
+      circle.style.top = `${y}px`;
+      circle.style.position = 'absolute';
+      circle.style.borderRadius = '50%';
+      circle.style.background = 'rgba(255,255,255,0.12)';
+      circle.style.pointerEvents = 'none';
+      circle.style.transform = 'scale(0)';
+      circle.style.transition = 'transform 600ms cubic-bezier(.2,.8,.2,1), opacity 600ms';
+      btn.appendChild(circle);
+      requestAnimationFrame(()=> circle.style.transform = 'scale(1)');
+      setTimeout(()=> {
+        circle.style.opacity = '0';
+        setTimeout(()=> circle.remove(), 700);
+      }, 450);
+    });
+  });
+
+  // ---- GSAP scrollReveal for sections ----
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.utils.toArray('section').forEach(s => {
+      gsap.from(s.querySelectorAll('.card, .project-card, .skill-card, .about-card, .cert-card'), {
+        scrollTrigger: { trigger: s, start: "top 80%" },
+        opacity: 0,
+        y: 36,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.12
+      });
+    });
+  }
+
+  // ---- accessibility: keyboard focus for nav links ----
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('focus', () => a.classList.add('focused')));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('blur', () => a.classList.remove('focused')));
+
+  // ---- optional: subtle parallax on hero mousemove ----
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.addEventListener('mousemove', e => {
+      const cx = window.innerWidth/2;
+      const cy = window.innerHeight/2;
+      const dx = (e.clientX - cx) / cx;
+      const dy = (e.clientY - cy) / cy;
+      gsap.to('.hero-inner', { x: dx * 12, y: dy * 8, duration: 0.8, ease: "power3.out" });
+    });
+    hero.addEventListener('mouseleave', () => gsap.to('.hero-inner', { x:0, y:0, duration: 0.6, ease: "power3.out" }));
+  }
+
+  // ---- small performance: re-layout clones on resize ----
   let resizeTO;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTO);
     resizeTO = setTimeout(() => {
+      // reposition clones within viewport
       clones.forEach(item => {
-        const nx = Math.random() * window.innerWidth;
-        const ny = Math.random() * window.innerHeight;
-        gsap.to(item.el, { left: nx, top: ny, duration: 1.2, ease: 'power2.inOut' });
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        gsap.to(item.el, { left: x, top: y, duration: 1.2, ease: "power2.inOut" });
       });
     }, 220);
   });
+
+  // ---- Handle URL parameters (for prefilled contact forms) ----
+  const urlParams = new URLSearchParams(window.location.search);
+  const subject = urlParams.get('subject');
+  if (subject) {
+    // You can use this to prefill forms or display messages
+    console.log('Contact subject:', subject);
+  }
+
 });
