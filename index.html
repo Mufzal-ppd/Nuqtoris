@@ -4,60 +4,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <!-- SEO Meta Tags -->
   <title>Mufzal Shaikh - Microsoft Certified Power Platform Developer</title>
   <meta name="description" content="Power Platform Developer specializing in Power Apps, Power Automate, Dataverse, SharePoint, and AI Chatbots. 2.5+ years experience building enterprise solutions." />
   <meta name="keywords" content="Power Platform, Power Apps, Power Automate, Dataverse, SharePoint, Microsoft, Developer, Freelance" />
   <meta name="author" content="Mufzal Shaikh" />
 
-  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Mufzal Shaikh - Power Platform Developer" />
   <meta property="og:description" content="Building custom business applications and automation solutions using Microsoft Power Platform" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nuqtoris.com" />
   <meta property="og:image" content="https://nuqtoris.com/public/assets/images/og-image.jpg" />
 
-  <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mufzal Shaikh - Power Platform Developer" />
   <meta name="twitter:description" content="Building custom business applications and automation solutions" />
   <meta name="twitter:image" content="https://nuqtoris.com/public/assets/images/og-image.jpg" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-
-  <!-- styles -->
+  <link rel="icon" type="image/png" href="public/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="public/assets/css/style.css">
 
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <!-- defer main script -->
   <script defer src="public/assets/js/main.js"></script>
 </head>
 <body id="page-body" class="theme-dark">
 
-  <!-- animated gradient background layer -->
   <div id="animated-gradient" aria-hidden="true"></div>
 
-  <!-- floating logos container (images will be duplicated by JS for repetitions) -->
   <div id="floating-root" class="floating-logos" aria-hidden="true">
-    <!-- base logos (place image files in assets/images/) -->
     <img src="public/assets/images/powerapps.png" data-name="Power Apps" class="logo-src" alt="Power Apps">
     <img src="public/assets/images/powerautomate.png" data-name="Power Automate" class="logo-src" alt="Power Automate">
     <img src="public/assets/images/sharepoint.png" data-name="SharePoint" class="logo-src" alt="SharePoint">
     <img src="public/assets/images/dataverse.png" data-name="Dataverse" class="logo-src" alt="Dataverse">
     <img src="public/assets/images/chatbot.png" data-name="PVA Chatbot" class="logo-src" alt="PVA Chatbot">
-    <img src="public/assets/images/aibuilder.png" data-name="AI Builder" class="logo-src" alt="AI Builder">
     <img src="public/assets/images/powerbi.png" data-name="Power BI" class="logo-src" alt="Power BI">
   </div>
 
-  <!-- custom cursor -->
   <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
   <div id="cursor-outline" class="cursor-outline" aria-hidden="true"></div>
 
-  <!-- theme toggle -->
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
 
   <nav class="nav" role="navigation">
@@ -67,8 +55,14 @@
         <span class="brand-text">Mufzal Shaikh</span>
       </div>
 
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <ul class="nav-links" role="menu">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="templates.html">Templates</a></li>
@@ -78,10 +72,8 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT -->
   <main>
 
-    <!-- HERO -->
     <section id="home" class="hero container">
       <div class="hero-inner">
         <h1 class="hero-title">Hi, I'm <span class="name-highlight">Mufzal Shaikh</span></h1>
@@ -102,7 +94,6 @@
       </div>
     </section>
 
-    <!-- ABOUT SUMMARY -->
     <section id="about" class="section container">
       <h2 class="section-title">Professional Summary</h2>
       <div class="card about-card">
@@ -131,7 +122,6 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="section container">
       <h2 class="section-title">Core Services</h2>
       <p class="section-subtitle">End-to-end Power Platform solutions designed to automate, streamline, and empower your business.</p>
@@ -183,7 +173,6 @@
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS -->
     <section id="projects-preview" class="section container">
       <h2 class="section-title">Featured Projects</h2>
 
@@ -239,7 +228,6 @@
       </div>
     </section>
 
-    <!-- CLIENT PROMISE -->
     <section id="promise" class="section container">
       <h2 class="section-title">My Commitment</h2>
       <div class="card promise-card">
@@ -265,7 +253,6 @@
       </div>
     </section>
 
-    <!-- CTA SECTION -->
     <section class="section container">
       <div class="card cta-card">
         <h2>Ready to Transform Your Business?</h2>

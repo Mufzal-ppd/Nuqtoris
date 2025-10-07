@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const animatedGradient = document.getElementById('animated-gradient');
   const cursorDot = document.getElementById('cursor-dot');
   const cursorOutline = document.getElementById('cursor-outline');
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
 
   // ---- set year in footer ----
   const yearEl = document.getElementById('year');
@@ -38,6 +40,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const current = body.classList.contains('theme-light') ? 'light' : 'dark';
     applyTheme(current === 'light' ? 'dark' : 'light');
   });
+
+  // ---- mobile navigation toggle ----
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      // animate hamburger icon
+      const spans = navToggle.querySelectorAll('span');
+      if (navLinks.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translateY(9px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translateY(-9px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
+
+    // close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navLinks.classList.remove('active');
+          const spans = navToggle.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+    });
+  }
 
   // ---- smooth anchor scrolling for nav links ----
   document.querySelectorAll('.nav-links a').forEach(a => {
