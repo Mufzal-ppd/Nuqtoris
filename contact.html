@@ -80,11 +80,6 @@
   </div>
 
   <button type="submit" class="btn btn-primary ripple" style="width: 100%;">Send Message</button>
-
-  <!-- Success message placeholder -->
-  <p id="form-success" style="display:none; color: var(--accent-cyan); margin-top: 1rem; text-align:center;">
-    ✅ Thank you! Your message has been sent successfully.
-  </p>
 </form>
 
         <div style="margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--glass-border); text-align: center;">
@@ -108,31 +103,53 @@
     </div>
   </footer>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const form = document.querySelector('.contact-form');
-  if (!form) return; // if form not found, stop
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form.contact-form");
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+  if (!form) return; // Stop if form not found
 
-    const successMsg = document.getElementById('form-success');
+  // Create success message element (appears below form)
+  let successMsg = document.createElement("div");
+  successMsg.id = "form-success";
+  successMsg.style.display = "none";
+  successMsg.style.textAlign = "center";
+  successMsg.style.marginTop = "1rem";
+  successMsg.style.color = "#22d3ee"; // Cyan glow color
+  successMsg.style.fontWeight = "600";
+  form.insertAdjacentElement("afterend", successMsg);
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // Stop normal page reload / navigation
+
+    const formData = new FormData(form);
 
     try {
       const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
       });
 
       if (response.ok) {
-        successMsg.style.display = 'block';
-        successMsg.style.opacity = '1';
+        // ✅ Success behavior
         form.reset();
+        successMsg.textContent = "✅ Request sent successfully.";
+        successMsg.style.display = "block";
+        successMsg.style.opacity = "1";
+
+        // Optional: hide after 4 seconds
+        setTimeout(() => {
+          successMsg.style.opacity = "0";
+          setTimeout(() => (successMsg.style.display = "none"), 600);
+        }, 4000);
       } else {
-        alert('Something went wrong. Please try again later.');
+        successMsg.textContent = "⚠️ Something went wrong. Please try again.";
+        successMsg.style.display = "block";
       }
     } catch (error) {
-      alert('Error submitting form: ' + error);
+      console.error("❌ Error submitting form:", error);
+      successMsg.textContent = "❌ Error sending request. Please try again later.";
+      successMsg.style.display = "block";
     }
   });
 });
