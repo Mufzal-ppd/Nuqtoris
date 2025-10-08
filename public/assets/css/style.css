@@ -1196,4 +1196,77 @@ section {
 .floating-logos {
   animation: ambientPulse 8s ease-in-out infinite;
 }
+/* ===== Interactive Card Depth Animation ===== */
 
+/* Container perspective gives a 3D illusion */
+.skills-grid,
+.services-grid,
+.projects-grid,
+.promise-grid {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Default state */
+.card,
+.skill-card,
+.service-card,
+.project-card,
+.promise-item {
+  position: relative;
+  z-index: 2;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s ease,
+    opacity 0.3s ease,
+    z-index 0.3s;
+}
+
+/* Hovered card — bring it forward */
+.card:hover,
+.skill-card:hover,
+.service-card:hover,
+.project-card:hover,
+.promise-item:hover {
+  transform: translateY(-15px) scale(1.04) rotateX(2deg);
+  z-index: 5;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+}
+
+/* Push surrounding cards backward */
+.card:hover ~ .card,
+.skill-card:hover ~ .skill-card,
+.service-card:hover ~ .service-card,
+.project-card:hover ~ .project-card,
+.promise-item:hover ~ .promise-item {
+  transform: translateY(10px) scale(0.96) rotateX(-2deg);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* When any card is hovered, dim all others slightly */
+.skills-grid:hover .card:not(:hover),
+.services-grid:hover .service-card:not(:hover),
+.projects-grid:hover .project-card:not(:hover),
+.promise-grid:hover .promise-item:not(:hover) {
+  opacity: 0.7;
+  transform: translateY(8px) scale(0.98);
+  z-index: 1;
+}
+
+/* Smooth reset when hover ends */
+.skills-grid:hover,
+.services-grid:hover,
+.projects-grid:hover,
+.promise-grid:hover {
+  transition: all 0.4s ease;
+}
+.card:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, rgba(167, 139, 250, 0.2), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
