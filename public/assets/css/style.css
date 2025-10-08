@@ -1072,6 +1072,92 @@ a:hover::after {
   }
 }
 
+/* ===== MOBILE FIX: Theme Toggle & Nav Toggle Spacing ===== */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: calc(var(--space-unit) * 2);
+    right: calc(var(--space-unit) * 2);
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    z-index: 9999; /* ensure it's above other items */
+  }
+
+  .nav-toggle {
+    position: fixed;
+    top: calc(var(--space-unit) * 2);
+    right: calc(var(--space-unit) * 9); /* shift it slightly left */
+    z-index: 9998;
+  }
+}
+
+/* ===== MOBILE FIX: Certifications layout ===== */
+@media (max-width: 768px) {
+  .cert-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  .cert-icon {
+    font-size: 2rem;
+    margin-bottom: calc(var(--space-unit) * 1);
+  }
+
+  .cert-content h3 {
+    font-size: 1rem;
+  }
+
+  .cert-content p {
+    font-size: 0.875rem;
+  }
+}
+
+/* ===== GLOBAL SECTION SPACING FIX ===== */
+.section {
+  padding-top: calc(var(--space-unit) * 14);  /* ~112px */
+  padding-bottom: calc(var(--space-unit) * 14);
+}
+
+/* Add a little breathing room between stacked cards or grids inside sections */
+.section > .card,
+.section > .container > .card,
+.section > .container > .services-grid,
+.section > .container > .projects-grid,
+.section > .container > .skills-grid {
+  margin-top: calc(var(--space-unit) * 4);
+}
+
+/* Smooth transitions for consistent flow between sections */
+section + section {
+  margin-top: calc(var(--space-unit) * 6);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ===== RESPONSIVE TUNING ===== */
+@media (max-width: 1024px) {
+  .section {
+    padding-top: calc(var(--space-unit) * 10);
+    padding-bottom: calc(var(--space-unit) * 10);
+  }
+
+  section + section {
+    margin-top: calc(var(--space-unit) * 4);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: calc(var(--space-unit) * 8);
+    padding-bottom: calc(var(--space-unit) * 8);
+  }
+
+  section + section {
+    margin-top: calc(var(--space-unit) * 3);
+  }
+}
+
 @media (max-width: 480px) {
   .container {
     padding: 0 calc(var(--space-unit) * 2);
