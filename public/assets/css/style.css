@@ -1270,3 +1270,21 @@ section {
   pointer-events: none;
   z-index: -1;
 }
+/* ===== PAGE HEADER VISIBILITY FIX ===== */
+
+/* All main sections should start after the nav */
+main,
+.section:first-of-type {
+  margin-top: var(--nav-height);
+  position: relative;
+  z-index: 2;
+}
+
+/* In case the blur nav overlaps slightly, add extra padding for smaller screens */
+@media (max-width: 768px) {
+  main,
+  .section:first-of-type {
+    margin-top: calc(var(--nav-height) + 20px);
+  }
+}
+
