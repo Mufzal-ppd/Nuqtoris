@@ -48,31 +48,45 @@
       <h1 class="section-title">Get In Touch</h1>
       <p class="section-subtitle">Let's discuss your project and how I can help bring your vision to life.</p>
       <div class="card contact-form">
-        <form action="mailto:info@nuqtoris.com" method="post" enctype="text/plain">
-          <div class="form-group">
-            <label for="name">Your Name *</label>
-            <input type="text" id="name" name="name" required placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required placeholder="john@example.com">
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject *</label>
-            <select id="subject" name="subject" required>
-              <option value="">Select a subject</option>
-              <option value="New Project">New Project Inquiry</option>
-              <option value="Consultation">Consultation Request</option>
-              <option value="Support">Technical Support</option>
-              <option value="General">General Question</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary ripple" style="width: 100%;">Send Message</button>
-        </form>
+<form 
+  action="https://formspree.io/f/xjkaeoeo" 
+  method="POST" 
+  class="contact-form"
+>
+  <div class="form-group">
+    <label for="name">Your Name *</label>
+    <input type="text" id="name" name="name" required placeholder="John Doe">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address *</label>
+    <input type="email" id="email" name="email" required placeholder="john@example.com">
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Subject *</label>
+    <select id="subject" name="subject" required>
+      <option value="">Select a subject</option>
+      <option value="New Project">New Project Inquiry</option>
+      <option value="Consultation">Consultation Request</option>
+      <option value="Support">Technical Support</option>
+      <option value="General">General Question</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="message">Message *</label>
+    <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary ripple" style="width: 100%;">Send Message</button>
+
+  <!-- Success message placeholder -->
+  <p id="form-success" style="display:none; color: var(--accent-cyan); margin-top: 1rem; text-align:center;">
+    ✅ Thank you! Your message has been sent successfully.
+  </p>
+</form>
+
         <div style="margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--glass-border); text-align: center;">
           <h3 style="margin-bottom: 1.5rem;">Other Ways to Connect</h3>
           <p style="margin-bottom: 1rem;">
