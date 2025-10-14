@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# This sitemap helps search engines find all your pages
+Sitemap: https://nuqtoris.com/sitemap.xml
