@@ -5,6 +5,23 @@
 
 /* ===== CSS VARIABLES & THEME SYSTEM ===== */
 :root {
+  --brand-color: #B31312; /* deep rich red tone from your logo */
+}
+
+/* Update brand text */
+.brand-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--brand-color);
+  letter-spacing: 0.5px;
+}
+
+/* Optional: add subtle hover */
+.brand-text:hover {
+  color: #E63E3A;
+  transition: color 0.3s ease;
+}
+:root {
   /* Colors - Dark Theme */
   --bg-primary: #0a0e27;
   --bg-secondary: #131829;
