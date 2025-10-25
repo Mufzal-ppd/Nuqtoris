@@ -1448,4 +1448,20 @@ main,
     margin-top: calc(var(--nav-height) + 20px);
   }
 }
+/* ===== CLICKABILITY FIX (Critical) ===== */
+.cursor-dot,
+.cursor-outline {
+  pointer-events: none !important; /* ensure they never block clicks */
+  z-index: 10000;
+}
+
+#animated-gradient,
+.floating-logos {
+  pointer-events: none !important; /* prevent background layers from blocking */
+}
+
+/* Enable normal cursor for external embeds or mobile views */
+body, html {
+  cursor: auto !important;
+}
 
