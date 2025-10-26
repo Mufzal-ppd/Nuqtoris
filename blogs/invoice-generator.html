@@ -131,7 +131,7 @@
 <body class="theme-dark">
   <main class="blog-container">
     <h1 class="blog-title">Invoice Generator</h1>
-    <p class="blog-meta">Blog ID: <span id="blogUID">INV_APP_01</span></p>
+    <input type="hidden" name="pdfId" value="APP_02">
 
     <div class="blog-content">
       <h2>Overview</h2>
@@ -162,11 +162,11 @@
       <button id="modalClose" class="modal-close">✕</button>
       <h3>Get the PDF</h3>
       <p>Enter your email and we’ll send this blog’s PDF within 2 minutes.</p>
-      <form id="downloadForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="hidden" name="pdfId" value="AI_LEAVE_001">
+      <form id="downloadForm" action="https://formspree.io/f/mjkpvnqr" method="POST">
+        <input type="hidden" name="pdfId" value="APP_02">
         <input id="dlEmail" type="email" name="email" placeholder="you@example.com" required>
         <div id="downloadFormMessage" class="muted"></div>
-        <button type="submit" class="btn btn-primary">Send PDF</button>
+        <button type="submit" class="btn btn-primary">Get PDF</button>
       </form>
     </div>
   </div>
@@ -192,7 +192,7 @@
         message.textContent = 'Please enter a valid email address.';
         message.style.color = 'salmon';
       } else {
-        message.textContent = 'Thanks! You’ll receive the PDF within 2 minutes.';
+        message.textContent = 'Thanks! You’ll receive the PDF within 2 minutes. Also Check SPAM/JUNK just in case!.';
         message.style.color = 'lightgreen';
       }
     });
