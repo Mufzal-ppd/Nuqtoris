@@ -43,16 +43,64 @@
       </ul>
     </div>
   </nav>
-  <main>
-    <section class="updating-soon container">
-      <div class="updating-soon-content">
-        <div class="updating-soon-icon">✍️</div>
-        <h1>Blog Coming Soon</h1>
-        <p>We're preparing to share insights, tutorials, and best practices about Power Platform development. Stay tuned for valuable content!</p>
-        <a href="index.html" class="btn btn-primary ripple" style="margin-top: 2rem;">Back to Home</a>
-      </div>
-    </section>
-  </main>
+<main>
+  <section class="section container" id="blogs-section">
+    <h2 class="section-title">Our Latest Blogs & Tutorials</h2>
+    <p class="section-subtitle">Explore tutorials and ideas built on Microsoft Power Platform by Nuqtoris.</p>
+
+    <!-- 🔍 Search Bar -->
+    <div class="blog-search">
+      <input id="blogSearch" type="search" placeholder="Search blogs by title..." aria-label="Search blogs">
+    </div>
+
+    <!-- 🧱 Blog Cards -->
+    <div id="blogsGrid" class="blogs-grid">
+
+      <!-- Blog 1 -->
+      <article class="blog-card" 
+               data-title="AI Leave Approval Flow" 
+               data-blog-url="blogs/ai-leave-approval.html" 
+               data-blog-id="AI_LEAVE_001">
+        <div class="card-left">
+          <img src="public/assets/images/blogs/powerautomate.png" alt="AI Logo" class="blog-card-logo">
+        </div>
+        <div class="card-right">
+          <h3 class="blog-card-title">AI Leave Approval Flow</h3>
+          <p class="blog-card-desc">Automate HR approvals with Power Automate & AI Builder — reduce turnaround time by 70%.</p>
+        </div>
+      </article>
+
+      <!-- Blog 2 -->
+      <article class="blog-card" 
+               data-title="Invoice Generator App" 
+               data-blog-url="blogs/invoice-generator.html" 
+               data-blog-id="INV_APP_002">
+        <div class="card-left">
+          <img src="public/assets/images/blogs/powerapps.png" alt="Invoice Logo" class="blog-card-logo">
+        </div>
+        <div class="card-right">
+          <h3 class="blog-card-title">Invoice Generator App</h3>
+          <p class="blog-card-desc">Power Apps + Power Automate app that generates professional PDFs and emails them automatically.</p>
+        </div>
+      </article>
+
+      <!-- Blog 3 -->
+      <article class="blog-card" 
+               data-title="Expense Tracker with Dataverse" 
+               data-blog-url="blogs/expense-tracker.html" 
+               data-blog-id="EXP_TRACK_003">
+        <div class="card-left">
+          <img src="public/assets/images/blogs/dataverse.png" alt="Dataverse Logo" class="blog-card-logo">
+        </div>
+        <div class="card-right">
+          <h3 class="blog-card-title">Expense Tracker with Dataverse</h3>
+          <p class="blog-card-desc">A simple Dataverse-connected tracker with Power BI insights and automated monthly reports.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</main>
   <footer class="footer">
     <div class="container">
       <p>&copy; <span id="year"></span> Nuqtoris. Founded by Mufzal Shaikh.</p>
