@@ -320,3 +320,32 @@ if (window.gsap) {
   }
 
 });
+
+// === Blog Page Features ===
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Blog Card Click → Open Blog in New Tab
+  const blogsGrid = document.getElementById("blogsGrid");
+  if (blogsGrid) {
+    blogsGrid.addEventListener("click", (e) => {
+      const card = e.target.closest(".blog-card");
+      if (card) {
+        const url = card.getAttribute("data-blog-url");
+        if (url) window.open(url, "_blank");
+      }
+    });
+  }
+
+  // Search Functionality
+  const blogSearch = document.getElementById("blogSearch");
+  if (blogSearch) {
+    blogSearch.addEventListener("input", () => {
+      const term = blogSearch.value.toLowerCase();
+      document.querySelectorAll(".blog-card").forEach((card) => {
+        const title = card.getAttribute("data-title").toLowerCase();
+        card.style.display = title.includes(term) ? "flex" : "none";
+      });
+    });
+  }
+
+});
