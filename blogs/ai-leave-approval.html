@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Leave Approval Flow – Nuqtoris</title>
+  <link rel="icon" type="image/png" href="../public/assets/images/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../public/assets/css/style.css">
+  <script defer src="../public/assets/js/main.js"></script>
+
+  <style>
+    /* === Blog Page Specific === */
+    .blog-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+    }
+
+    .blog-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .blog-meta {
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .blog-content h2 {
+      margin-top: 2.5rem;
+      color: var(--accent-purple);
+    }
+
+    .blog-content p, .blog-content li {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* === Download Button (floating) === */
+    .download-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 25px;
+      background: var(--gradient-primary);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-glow);
+    }
+    .download-btn .download-icon {
+      font-size: 1.25rem;
+    }
+
+    /* === Modal === */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+
+    .modal-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    #downloadForm input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 15px;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+    }
+
+    #downloadFormMessage {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body class="theme-dark">
+  <main class="blog-container">
+    <h1 class="blog-title">AI Leave Approval Flow</h1>
+    <p class="blog-meta">Blog ID: <span id="blogUID">AI_LEAVE_001</span></p>
+
+    <div class="blog-content">
+      <h2>Overview</h2>
+      <p>Automate your HR approval process with an AI Builder model that can evaluate leave requests and trigger dynamic Power Automate approvals. This approach eliminates manual decisions and ensures faster responses.</p>
+
+      <h2>Key Steps</h2>
+      <ol>
+        <li>Create a SharePoint list for leave requests with columns like Employee Name, Reason, and Manager.</li>
+        <li>Build a Power Automate flow that triggers on new form submission.</li>
+        <li>Use AI Builder to analyze request sentiment or extract data from attachments.</li>
+        <li>Set up conditional approvals — auto-approve based on conditions, or escalate to HR.</li>
+      </ol>
+
+      <h2>Result & Impact</h2>
+      <p>This automation reduces HR load by <strong>70%</strong> and ensures consistency across departments. It’s scalable, easy to maintain, and integrates seamlessly with Teams and SharePoint.</p>
+    </div>
+  </main>
+
+  <!-- Floating Download Button -->
+  <button id="downloadBtn" class="download-btn" aria-label="Download PDF">
+    <span class="download-icon">⬇</span>
+    <span class="download-text">Download as PDF</span>
+  </button>
+
+  <!-- Modal -->
+  <div id="downloadModal" class="modal">
+    <div class="modal-inner">
+      <button id="modalClose" class="modal-close">✕</button>
+      <h3>Get the PDF</h3>
+      <p>Enter your email and we’ll send this blog’s PDF within 2 minutes.</p>
+      <form id="downloadForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="pdfId" value="AI_LEAVE_001">
+        <input id="dlEmail" type="email" name="email" placeholder="you@example.com" required>
+        <div id="downloadFormMessage" class="muted"></div>
+        <button type="submit" class="btn btn-primary">Send PDF</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Download Popup JS
+    const modal = document.getElementById('downloadModal');
+    const openBtn = document.getElementById('downloadBtn');
+    const closeBtn = document.getElementById('modalClose');
+    const form = document.getElementById('downloadForm');
+    const message = document.getElementById('downloadFormMessage');
+    const emailInput = document.getElementById('dlEmail');
+
+    openBtn.onclick = () => modal.style.display = 'flex';
+    closeBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    form.addEventListener('submit', function(e) {
+      const email = emailInput.value.trim();
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailRegex.test(email)) {
+        e.preventDefault();
+        message.textContent = 'Please enter a valid email address.';
+        message.style.color = 'salmon';
+      } else {
+        message.textContent = 'Thanks! You’ll receive the PDF within 2 minutes.';
+        message.style.color = 'lightgreen';
+      }
+    });
+  </script>
+</body>
+</html>
